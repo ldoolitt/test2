@@ -1,7 +1,8 @@
-## Introduction
+## Marble Board Introduction
 
-Design is for an Open Hardware (OHWR) dual-LPC-FMC carrier based on an
-Artix-7 in a FG484 package.  It has an AMC form-factor, usable
+Design is for an Open Hardware (OHWR) dual-LPC-FMC carrier,
+named Marble, based on an Artix-7 in a FG484 package.
+It has an AMC form-factor, usable
 within an AMC crate, but is also capable of running stand-alone with only
 an external DC power supply, commonly described as NAD (Network Attached
 Device).  This document defines the scope of the design.
