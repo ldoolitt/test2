@@ -1,7 +1,7 @@
 ## Introduction
 
 Design is for an Open Hardware (OHWR) dual-LPC-FMC carrier based on an
-Artix-7 in a FG484 package.  It will be in the AMC form-factor, usable
+Artix-7 in a FG484 package.  It has an AMC form-factor, usable
 within an AMC crate, but is also capable of running stand-alone with only
 an external DC power supply, commonly described as NAD (Network Attached
 Device).  This document defines the scope of the design.
@@ -39,13 +39,13 @@ BOM should total less than $200.
 
 ### Power
 
-At least three power entry methods will be supported:  a simple barrel-style
+Three power entry methods are supported:  a simple barrel-style
 connector, e.g., CUI PJ-102AH;  AMC backplane power, when used in a crate;
 and PoE, using an optional add-on module.  Input voltage range is at least
-6-15 Volts.  FPGA power supplies should support dense designs up to at least
+6-15 Volts.  FPGA power supplies are intended to support dense designs up to at least
 A100T, and at least fluffy designs in A200T.  In-situ monitoring of the FPGA
 core current will help users figure out if their logic design is pushing the
-board close to its limit.  Switching regulators need to be synchronizable to
+board close to its limit.  Switching regulators are synchronizable to
 an FPGA-defined clock.
 
 ### Configuration
@@ -55,13 +55,12 @@ four SFP connectors/cages.  When built for use as an AMC card-in-a-crate,
 the GTP connect to four backplane PCIe lanes.  Selection is done with
 capacitor placement during manufacturing or (skilled) rework.  Error-free
 performance is expected with baud rates up to the 6 Gbps capability of -2
-speed grade Artix chips.  No support is planned for FMC DP lanes or clocks.
+speed grade Artix chips.  No support is included for FMC DP lanes or clocks.
 
 ### White Rabbit compatible
 
-The primary on-board oscillator will be a White-Rabbit-compatible 125 MHz
-VCXO.  Additional on-board oscillators will be kept to a minimum, perhaps
-zero.
+The primary on-board oscillator is a White-Rabbit-compatible 125 MHz
+VCXO.  Additional on-board oscillators are be kept to a minimum, configurable.
 
 ### Booting and Security
 
@@ -69,7 +68,8 @@ In the field, the FPGA will boot from SPI (Xilinx's Master Serial mode).
 The WP pin of that SPI flash chip is controlled from an on-board mechanical
 switch.
 
-A primary design objective is to make the board immune from lock-up or
+A primary design objective is to make the board (in its NAD configuration)
+immune from lock-up or
 damage caused by corrupted, incompetently built, or even malicious bitfiles
 loaded in the field.  This means that the FPGA cannot be given any mechanism
 to cause physical damage by e.g., reprogramming power supply voltages or
@@ -95,7 +95,7 @@ the board, or loading and running a bitfile.
 ### Fully Open Design
 
 As a baseline demonstration and showcase for OHWR and open-source gateware,
-it's important that its design use only non-proprietary CAD tools.  Relatedly,
+it's important that this design uses only non-proprietary CAD tools.  Relatedly,
 it's also important that the components in its BoM have proper public (not
 under NDA) documentation.
 
