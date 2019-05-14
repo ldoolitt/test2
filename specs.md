@@ -57,7 +57,13 @@ capacitor placement during manufacturing or (skilled) rework.  Error-free
 performance is expected with baud rates up to the 6 Gbps capability of -2
 speed grade Artix chips.  No support is planned for FMC DP lanes or clocks.
 
-### Other
+### White Rabbit compatible
+
+The primary on-board oscillator will be a White-Rabbit-compatible 125 MHz
+VCXO.  Additional on-board oscillators will be kept to a minimum, perhaps
+zero.
+
+### Booting and Security
 
 In the field, the FPGA will boot from SPI (Xilinx's Master Serial mode).
 The WP pin of that SPI flash chip is controlled from an on-board mechanical
@@ -73,10 +79,6 @@ a golden bitfile, stored in a hardware-write-protected part of the SPI flash.
 The microcontroller programming, in contrast, is application-independent and
 intended to be trusted.  It will therefore be programmed on the bench only,
 not remotely.
-
-The primary on-board oscillator will be a White-Rabbit-compatible 125 MHz
-VCXO.  Additional on-board oscillators will be kept to a minimum, perhaps
-zero.
 
 Board bring-up and some initial debugging will use an on-board FT4232 USB
 adapter; turn-on instructions and an associated OpenOCD configuration file
@@ -97,7 +99,8 @@ it's important that its design use only non-proprietary CAD tools.  Relatedly,
 it's also important that the components in its BoM have proper public (not
 under NDA) documentation.
 
-Additional features:
+### Additional features
+
 *   2 x dual-row (12-pin) Pmod (16 3.3V FPGA pins total)
 *   4 pair TMDS debug port (8 3.3V FPGA pins total)
 *   Self-JTAG
@@ -108,5 +111,4 @@ Additional features:
 *   Handful of user LEDs and push-buttons for both U1 and U2
 
 The above description clearly does not contain as much information as the
-final schematic.  LBNL staff will collaborate on figuring out details from
-here.
+final schematic. 
