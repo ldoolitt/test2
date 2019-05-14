@@ -6,19 +6,22 @@ within an AMC crate, but is also capable of running stand-alone with only
 an external DC power supply, commonly described as NAD (Network Attached
 Device).  This document defines the scope of the design.
 
+### Components
 
 The dominant components are
 *  U1, the FPGA, Artix-7 in FG484
 *  U2, a housekeeping microcontroller
 *  U3, a 512M x 16 DDR3L memory chip
-*  U4, an RGMII 1000BASE-T PHY
-*  U5, an RGMII 1000BASE-X PHY
+*  U4, an RGMII Ethernet PHY
 *  P1, LPC FMC carrier
 *  P2, LPC FMC carrier
 
 U2 takes on the MMC role when the board is used in the AMC context.
-U4 makes a 1000BASE-T connection with an 8P8C connector.
-U5 makes a 1000BASE-X connection to the AMC backplane's port 0.
+
+U4 makes a 1000BASE-T connection with an 8P8C connector, or
+a 1000BASE-X connection to the AMC backplane's port 0.
+
+### Banking
 
 FPGA I/O banks are assigned as follows:
 * bank 35  1.35V:  all used up on DDR3L
@@ -34,6 +37,8 @@ It should make economic sense to produce the board in quantity 50 with
 a $145 XC7A100T-2FGG484C; the natural conclusion is that the rest of the
 BOM should total less than $200.
 
+### Power
+
 At least three power entry methods will be supported:  a simple barrel-style
 connector, e.g., CUI PJ-102AH;  AMC backplane power, when used in a crate;
 and PoE, using an optional add-on module.  Input voltage range is at least
@@ -43,12 +48,16 @@ core current will help users figure out if their logic design is pushing the
 board close to its limit.  Switching regulators need to be synchronizable to
 an FPGA-defined clock.
 
+### Configuration
+
 In stand-alone context, the four GTP lanes of this Artix package connect to
 four SFP connectors/cages.  When built for use as an AMC card-in-a-crate,
 the GTP connect to four backplane PCIe lanes.  Selection is done with
 capacitor placement during manufacturing or (skilled) rework.  Error-free
 performance is expected with baud rates up to the 6 Gbps capability of -2
 speed grade Artix chips.  No support is planned for FMC DP lanes or clocks.
+
+### Other
 
 In the field, the FPGA will boot from SPI (Xilinx's Master Serial mode).
 The WP pin of that SPI flash chip is controlled from an on-board mechanical
@@ -80,6 +89,8 @@ I2C ports, but not any controls that could damage hardware.
 As important as the microcontroller is to the long-term serviceability of
 the board, it should not be needed to exercise the core functions of powering
 the board, or loading and running a bitfile.
+
+### Fully Open Design
 
 As a baseline demonstration and showcase for OHWR and open-source gateware,
 it's important that its design use only non-proprietary CAD tools.  Relatedly,
